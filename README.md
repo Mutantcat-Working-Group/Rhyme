@@ -23,3 +23,93 @@
 - 传统运维场景适用，并且因为具有一定的自我排错能力，能很大程度上减少时间成本
 - 自动化运维场景适用，通过调用Rhyme能极大简化自动化运维脚本的大小
 - 快捷学习场景或者编译场景配置适用，一条指令安装好编译环境和运行环境
+
+### 三、快速开始
+
+- 下载最新版本的诗·韵可执行程序（多平台用法统一）
+
+- ```shell
+  # 下载诗歌以及相关依赖诗歌 使用一条指令运行
+  [root@localhost home]# ./org.mutantcat.rhyme -file install-nginx-centos7-amd64.poem -su
+  ██████╗ ██╗  ██╗██╗   ██╗███╗   ███╗███████╗
+  ██╔══██╗██║  ██║╚██╗ ██╔╝████╗ ████║██╔════╝
+  ██████╔╝███████║ ╚████╔╝ ██╔████╔██║█████╗  
+  ██╔══██╗██╔══██║  ╚██╔╝  ██║╚██╔╝██║██╔══╝  
+  ██║  ██║██║  ██║   ██║   ██║ ╚═╝ ██║███████╗
+  ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝╚══════╝
+  By: mutantcat.org         诗·韵 v1.0.20250331
+  [./org.mutantcat.rhyme -file install-nginx-centos7-amd64.poem -su]
+  ↓↓↓↓↓↓↓↓↓↓↓ 韵 - 系统环境信息自检 ↓↓↓↓↓↓↓↓↓↓↓
+  韵 - 操作系统:   linux
+  韵 - 系统架构:   amd64
+  韵 - CPU核心:    1
+  韵 - 系统类型:   CentOS Linux
+  韵 - 版本号:     7 (Core)
+  韵 - ID:         centos
+  韵 - ID_LIKE:    rhel fedora
+  韵 - 主版本:     7
+  ↑↑↑↑↑↑↑↑↑↑↑ 韵 - 系统环境信息自检 ↑↑↑↑↑↑↑↑↑↑↑
+  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+  ↓↓↓↓↓↓↓↓↓↓↓ 诗 - 开始运行解析内容 ↓↓↓↓↓↓↓↓↓↓↓
+  诗 - 开始执行诗句: CentOS7(amd64)安装Nginx
+  
+  诗 - 需要的前置验证: check-yum-linux-centos7-amd64
+  诗 - 开始执行诗句: 检查yum是否可用
+  
+  诗 - 需要的前置验证: check-uname-a
+  诗 - 开始执行诗句: 检查一下uname能否执行
+  
+  诗 - 正在执行命令 check-uname-a 1 : uname -a (最长 10 秒)
+  
+  诗 - 命令执行成功 check-uname-a 1 : Linux localhost.localdomain 3.10.0-693.el7.x86_64 #1 SMP Tue Aug 22 21:09:27 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
+  
+  诗 - 执行结果: 验证yum成功
+  诗 - 前置验证成功: check-uname-a
+  
+  诗 - 正在执行命令 check-yum-linux-centos7-amd64 1 : yum --version (最长 10 秒)
+  
+  诗 - 命令执行成功 check-yum-linux-centos7-amd64 1 : 3.4.3
+    已安装： rpm-4.11.3-25.el7.x86_64 在 2025-02-16 01:39
+    构建    ：CentOS BuildSystem <http://bugs.centos.org> 在 2017-08-03 03:48
+    已提交：Panu Matilainen <pmatilai@redhat.com> ，共 2017-03-17 
+  
+    已安装： yum-3.4.3-154.el7.centos.noarch 在 2025-02-16 01:39
+    构建    ：CentOS BuildSystem <http://bugs.centos.org> 在 2017-08-05 19:13
+    已提交：CentOS Sources <bugs@centos.org> ，共 2017-08-01 
+  
+    已安装： yum-plugin-fastestmirror-1.1.31-42.el7.noarch 在 2025-02-16 01:39
+    构建    ：CentOS BuildSystem <http://bugs.centos.org> 在 2017-08-11 10:23
+    已提交：Valentina Mukhamedzhanova <vmukhame@redhat.com> ，共 2017-03-21 
+  
+  诗 - 执行结果: 验证yum成功
+  诗 - 前置验证成功: check-yum-linux-centos7-amd64
+  
+  诗 - 正在执行命令 install-nginx-centos7-amd64 1 : yum install -y epel-release (最长 80 秒)
+  
+  诗 - 命令执行成功 install-nginx-centos7-amd64 1 : 已加载插件：fastestmirror, langpacks
+  Loading mirror speeds from cached hostfile
+   * base: mirrors.aliyun.com
+   * epel: d2lzkl7pfhq30w.cloudfront.net
+   * extras: mirrors.aliyun.com
+   * updates: mirrors.aliyun.com
+  软件包 epel-release-7-14.noarch 已安装并且是最新版本
+  无须任何处理
+  
+  诗 - 正在执行命令 install-nginx-centos7-amd64 2 : yum install -y nginx (最长 80 秒)
+  
+  诗 - 命令执行成功 install-nginx-centos7-amd64 2 : 已加载插件：fastestmirror, langpacks
+  Loading mirror speeds from cached hostfile
+   * base: mirrors.aliyun.com
+   * epel: d2lzkl7pfhq30w.cloudfront.net
+   * extras: mirrors.aliyun.com
+   * updates: mirrors.aliyun.com
+  软件包 1:nginx-1.20.1-10.el7.x86_64 已安装并且是最新版本
+  无须任何处理
+  
+  诗 - 执行结果: 安装成功
+  ↑↑↑↑↑↑↑↑↑↑↑ 诗 - 完成运行解析内容 ↑↑↑↑↑↑↑↑↑↑↑
+  
+  ```
+
+- 
+
