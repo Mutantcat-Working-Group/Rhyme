@@ -1,0 +1,14 @@
+title:  windows上检查当前用户
+info: windows上检查当前用户
+from: check-* install-*
+need: check-uname-a
+
+poem:
+chcp 65001
+-p10 bad:
+whoami
+-p10 bad:
+
+good: 查找成功
+bad: 查找失败
+

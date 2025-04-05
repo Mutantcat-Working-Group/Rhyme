@@ -1,0 +1,11 @@
+title: 检查一下uname能否执行
+info: 简单的uname(By:tyza66)
+from: check-* install-*
+need:
+
+poem:
+yum
+-p10 check-have-any
+
+good: 验证yum成功
+bad: 无法使用yum
