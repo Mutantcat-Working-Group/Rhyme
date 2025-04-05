@@ -1,16 +1,15 @@
 title: 标题
 info: 介绍(作者信息)
-from: 错误编号
+from: check-* install-*
 need: 0 2 14
 
 poem:
 yum install nginx
--p80 bad:
+-p80 bad=
 su $&{user}
--p10 bad:
+-p10 bad=
 123456
--p10 check:200
+-p10 bad= check-have-any
 
 good: 执行成功
 bad: 执行失败
-

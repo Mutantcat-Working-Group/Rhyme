@@ -1,14 +1,13 @@
 title:  windows上检查当前用户
 info: windows上检查当前用户
 from: check-* install-*
-need: check-uname-a
+need:
 
 poem:
 chcp 65001
--p10 bad:
+-p10 bad=
 whoami
--p10 bad:
+-p10 bad= check-have=tyza66
 
 good: 查找成功
 bad: 查找失败
-

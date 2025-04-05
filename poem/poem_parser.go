@@ -28,8 +28,16 @@ func ParsePoem(origin string, args map[string]string) *Poem {
 				poem.Info = strings.TrimPrefix(poem.Info, " ")
 			} else if strings.HasPrefix(line, "from:") || index == 2 {
 				poem.From = strings.Split(strings.TrimPrefix(strings.TrimPrefix(line, "from:"), " "), " ")
+				// 去掉每部分的前后空格
+				for i := 0; i < len(poem.From); i++ {
+					poem.From[i] = strings.TrimSpace(poem.From[i])
+				}
 			} else if strings.HasPrefix(line, "need:") || index == 3 {
 				poem.Need = strings.Split(strings.TrimPrefix(strings.TrimPrefix(line, "need:"), " "), " ")
+				// 去掉每部分的前后空格
+				for i := 0; i < len(poem.Need); i++ {
+					poem.Need[i] = strings.TrimSpace(poem.Need[i])
+				}
 			} else if line == "" {
 				mode = 1
 			}
@@ -44,8 +52,12 @@ func ParsePoem(origin string, args map[string]string) *Poem {
 		} else if mode == 2 {
 			if strings.HasPrefix(line, "good:") {
 				poem.Good = strings.TrimPrefix(line, "good:")
+				// 去掉前后空格
+				poem.Good = strings.TrimPrefix(poem.Good, " ")
 			} else if strings.HasPrefix(line, "bad:") {
 				poem.Bad = strings.TrimPrefix(line, "bad:")
+				// 去掉前后空格
+				poem.Bad = strings.TrimPrefix(poem.Bad, " ")
 			} else if line == "" {
 				mode = 3
 			}

@@ -4,8 +4,8 @@ from: check-* install-*
 need:
 
 poem:
-yum
--p10 check-have-any
+uname -a
+-p10 bad= check-have-any
 
 good: 验证yum成功
 bad: 无法使用yum

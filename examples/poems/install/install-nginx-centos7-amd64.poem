@@ -1,16 +1,11 @@
 title: CentOS7(amd64)安装Nginx
 info: 为CentOS7(amd64)系统安装Nginx
 from:
-need:
+need: check-* install-*
 
 poem:
 yum install nginx
--p80 bad:
-su $&{user}
--p10 bad:
-123456
--p10 check:200
+-p80 bad= check-have-any
 
 good: 安装成功
 bad: 安装失败
-

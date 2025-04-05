@@ -5,8 +5,7 @@ need: check-uname-a
 
 poem:
 yum
--p10 check-have-any
+-p10 bad= check-have-any
 
 good: 验证yum成功
 bad: 无法使用yum
-

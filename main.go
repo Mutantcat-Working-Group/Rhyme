@@ -19,7 +19,7 @@ func main() {
 	key := flag.String("key", "", "搜索关键字")           // 字符串标志
 	//web := flag.String("file", "", "目标诗歌网络路径")  // 字符串标志
 	//cloudstep := flag.String("cloudstep", "", "目标诗歌云阶路径")  // 字符串标志
-	depth := flag.Int("depth", 18, "最大联调深度")        // 整数标志
+	depth := flag.Int("depth", 5, "最大联调深度")         // 整数标志
 	su := flag.Bool("su", false, "是否使用管理员权限运行")     // 布尔标志
 	search := flag.Bool("search", false, "是否为搜索模式") // 布尔标志
 	flag.Parse()
@@ -138,7 +138,7 @@ By: mutantcat.org         诗·韵 v1.0.20250331
 		poemName = strings.Split(poemName[len(poemName)-1], ".")
 		parsePoem.Name = poemName[0]
 		// 运行诗词
-		poem.RunPoem(*parsePoem, *su)
+		poem.RunPoem(*parsePoem, *su, 1)
 		fmt.Println("↑↑↑↑↑↑↑↑↑↑↑ 诗 - 完成运行解析内容 ↑↑↑↑↑↑↑↑↑↑↑")
 	}
 }
