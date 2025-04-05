@@ -4,10 +4,8 @@ from: check-* install-*
 need:
 
 poem:
-chcp 65001
--p10 bad=
 whoami
--p10 bad= check-have=tyza66
+-p10 bad= check-have-any
 
 good: 查找成功
 bad: 查找失败

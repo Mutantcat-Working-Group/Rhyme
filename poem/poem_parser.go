@@ -15,7 +15,11 @@ func ParsePoem(origin string, args map[string]string) *Poem {
 	poem.Args = args
 	poem.Poem = make([]string, 0)
 
-	lines := strings.Split(origin, "\r\n")
+	lines := strings.Split(origin, "\n")
+	// 去掉所有 \r
+	for i := 0; i < len(lines); i++ {
+		lines[i] = strings.ReplaceAll(lines[i], "\r", "")
+	}
 	// 读取第一行 中的内容到标题 前面的title:可以省略
 	mode := 0
 	for index, line := range lines {

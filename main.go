@@ -73,10 +73,10 @@ By: mutantcat.org         诗·韵 v1.0.20250331
 		global_config.OS_VER_ID = info["VERSION_ID"]
 		// 打印发行版信息
 		fmt.Println("韵 - 系统类型:	", global_config.OS_NAME)
-		fmt.Println("韵 - 版本号:		", global_config.OS_VER)
-		fmt.Println("韵 - ID:		", global_config.OS_ID)
+		fmt.Println("韵 - 版本号:	", global_config.OS_VER)
+		fmt.Println("韵 - ID:	", global_config.OS_ID)
 		fmt.Println("韵 - ID_LIKE:	", global_config.OS_LIKE)
-		fmt.Println("韵 - 主版本:		", global_config.OS_VER_ID)
+		fmt.Println("韵 - 主版本:	", global_config.OS_VER_ID)
 	}
 	fmt.Println("↑↑↑↑↑↑↑↑↑↑↑ 韵 - 系统环境信息自检 ↑↑↑↑↑↑↑↑↑↑↑")
 	// 读取配置文件中所有文本
@@ -102,7 +102,7 @@ By: mutantcat.org         诗·韵 v1.0.20250331
 		fmt.Println("韵 - 您可以使用 rayme -file xxx 来运行指定的诗歌文件")
 	} else {
 		content := fetcher.ReadFile(*file)
-		fmt.Println("★★★★★★★★★★★★★★★★★★★★★★★★★★")
+		fmt.Println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★")
 		fmt.Println("↓↓↓↓↓↓↓↓↓↓↓ 诗 - 开始运行解析内容 ↓↓↓↓↓↓↓↓↓↓↓")
 		// 先解析参数
 		args_map := make(map[string]string)

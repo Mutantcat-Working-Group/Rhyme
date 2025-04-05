@@ -1,7 +1,7 @@
 title: CentOS7(amd64)安装Nginx
 info: 为CentOS7(amd64)系统安装Nginx
-from:
-need: check-* install-*
+from: check-* install-*
+need: check-yum-linux-centos7-amd64
 
 poem:
 yum install nginx

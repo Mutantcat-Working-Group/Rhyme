@@ -63,6 +63,7 @@ func RunPoem(poem Poem, su bool, depth int) bool {
 
 				if RunPoem(*parsePoem, su, depth+1) {
 					fmt.Println("诗 -", "前置验证成功:", need)
+					fmt.Println()
 				} else {
 					fmt.Println()
 					fmt.Println("诗 -", "前置诗歌验证失败:", need)
@@ -111,7 +112,7 @@ func RunPoem(poem Poem, su bool, depth int) bool {
 		}
 
 		// 执行命令并设置超时
-		fmt.Println("诗 -", "正在执行命令", line_number, ":", cmdLine, "(最长", waitTime, "秒)")
+		fmt.Println("诗 -", "正在执行命令", poem.Name, line_number, ":", cmdLine, "(最长", waitTime, "秒)")
 		ctx, cancel := context.WithTimeout(context.Background(), time.Duration(waitTime)*time.Second)
 		defer cancel()
 		cmdLine = strings.TrimPrefix(cmdLine, "su ") // 如果原本有一个su加权 则去掉 之后由系统主动指定
@@ -120,13 +121,13 @@ func RunPoem(poem Poem, su bool, depth int) bool {
 
 		// 处理结果
 		if ctx.Err() == context.DeadlineExceeded {
-			fmt.Println("诗 -", "命令超时取消", line_number, ":", cmdLine)
+			fmt.Println("诗 -", "命令超时取消", poem.Name, line_number, ":", cmdLine)
 			success = false
 			fmt.Println()
 			fmt.Println("诗 -", "执行结果:", poem.Bad)
 			return success
 		} else if err != nil {
-			fmt.Println("诗 -", "执行命令错误", line_number, ":", err)
+			fmt.Println("诗 -", "执行命令错误", poem.Name, line_number, ":", err)
 			if bad_saver != "" {
 				fmt.Println("诗 -", "尝试修复问题:", bad_saver)
 				file := fetcher.CheckAndGetPoemFile(poem.Path, bad_saver+".poem")
@@ -168,24 +169,24 @@ func RunPoem(poem Poem, su bool, depth int) bool {
 						return success
 					}
 				}
-			}
-			ctx, cancel := context.WithTimeout(context.Background(), time.Duration(waitTime)*time.Second)
-			defer cancel()
-			cmd := exec.Run(ctx, cmd, cmdLine, su)
-			output, err := cmd.Output()
-			if err != nil {
-				fmt.Println("诗 -", "修复后命令仍错误", line_number, ":", err)
-				success = false
-				fmt.Println("诗 -", "执行结果:", poem.Bad)
-				return success
-			} else {
-				fmt.Println("诗 -", "修复后命令执行成功", line_number, ":", string(output))
-				success = true
+				ctx, cancel := context.WithTimeout(context.Background(), time.Duration(waitTime)*time.Second)
+				defer cancel()
+				cmd := exec.Run(ctx, cmd, cmdLine, su)
+				output, err := cmd.Output()
+				if err != nil {
+					fmt.Println("诗 -", "修复后命令仍错误", poem.Name, line_number, ":", err)
+					success = false
+					fmt.Println("诗 -", "执行结果:", poem.Bad)
+					return success
+				} else {
+					fmt.Println("诗 -", "修复后命令执行成功", poem.Name, line_number, ":", string(output))
+					success = true
+				}
 			}
 			return success
 		} else {
 			fmt.Println()
-			fmt.Println("诗 -", "命令执行成功", line_number, ":", string(output))
+			fmt.Println("诗 -", "命令执行成功", poem.Name, line_number, ":", string(output))
 			success = true
 		}
 
