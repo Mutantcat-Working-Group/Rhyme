@@ -4,7 +4,9 @@ from: check-* install-*
 need: check-yum-linux-centos7-amd64
 
 poem:
-yum install nginx
+yum install -y epel-release
+-p80 bad=
+yum install -y nginx
 -p80 bad= check-have-any
 
 good: 安装成功

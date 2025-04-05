@@ -16,7 +16,7 @@ func Run(ctx context.Context, cmd *exec.Cmd, line string, su bool) *exec.Cmd {
 		if !su {
 			cmd = exec.CommandContext(ctx, "bash", "-c", line)
 		} else {
-			cmd = exec.CommandContext(ctx, "su", "-c", line)
+			cmd = exec.CommandContext(ctx, "sudo", "bash", "-c", line)
 		}
 	} else {
 		fmt.Println("诗 - 未知的操作系统，请反馈此问题。")

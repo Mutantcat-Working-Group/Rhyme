@@ -254,6 +254,13 @@ func RunPoem(poem Poem, su bool, depth int) bool {
 		line_number++
 	}
 
+	if poem.Good == "" {
+		poem.Good = "没有设置成功执行结果(成功)"
+	}
+	if poem.Bad == "" {
+		poem.Bad = "没有设置失败执行结果(失败)"
+	}
+
 	if success {
 		fmt.Println("诗 -", "执行结果:", poem.Good)
 	} else {
