@@ -1,12 +1,10 @@
-title: CentOS7(amd64)安装Nginx
-info: 为CentOS7(amd64)系统安装Nginx
+title: 修复epel-release
+info: 为yum中修复epel-release用于拉取nginx系列
 from: check-* install-*
 need: check-yum-linux-centos7-amd64
 
 poem:
 yum install -y epel-release
--p80 bad=fix-epel-release-linux-centos7-amd64
-yum install -y nginx
 -p80 bad= check-have-any
 
 good: 安装成功
