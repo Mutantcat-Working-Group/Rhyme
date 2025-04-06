@@ -1,7 +1,8 @@
 <div align="center">
-<img src="https://s2.loli.net/2025/03/30/GQDnK8aPeoBRlmX.jpg" style="width:100px;"/>
+<img src="https://s2.loli.net/2025/03/30/GQDnK8aPeoBRlmX.jpg" style="width:100px;" width="100"/>
 <h2>诗·韵</h2>
 </div>
+
 
 ### 一、功能简述
 
