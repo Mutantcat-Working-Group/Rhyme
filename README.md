@@ -156,23 +156,23 @@
 
 ### 五、诗词参数说明
 
-- 诗词中可以定义$&{keyword}参数，运行时将会将诗词中全局的$&{keyword}替换为指定的Args参数值
+- 诗词中可以定义`$&{keyword}`参数，运行时将会将诗词中全局的`$&{keyword}`替换为指定的Args参数值
 
 - 若不传参，则参数将保留$&{keyword}形式
 
 - 诗词中有一些预留参数，详见下表
 
-| 参数名称   | 参数说明     | 是否可覆盖 |
-| ---------- | ------------ | ---------- |
-| OS_TYPE    | 操作系统     | 不建议     |
-| OS_ARCH    | 系统架构     | 不建议     |
-| OS_CORE    | CPU核心      | 不建议     |
-| OS_NAME    | 系统类型     | 不建议     |
-| OS_VER     | 版本号       | 不建议     |
-| OS_ID      | 系统ID       | 不建议     |
-| OS_LIKE    | ID_LIKE      | 不建议     |
-| OS_VER_ID  | 主版本       | 不建议     |
-| NEED_DEPTH | 最大联调深度 | 是         |
+    | 参数名称   | 参数说明     | 是否可覆盖 |
+    | ---------- | ------------ | ---------- |
+    | OS_TYPE    | 操作系统     | 不建议     |
+    | OS_ARCH    | 系统架构     | 不建议     |
+    | OS_CORE    | CPU核心      | 不建议     |
+    | OS_NAME    | 系统类型     | 不建议     |
+    | OS_VER     | 版本号       | 不建议     |
+    | OS_ID      | 系统ID       | 不建议     |
+    | OS_LIKE    | ID_LIKE      | 不建议     |
+    | OS_VER_ID  | 主版本       | 不建议     |
+    | NEED_DEPTH | 最大联调深度 | 是         |
 
 ### 六、诗的结构
 
@@ -198,14 +198,14 @@ bad: 安装失败									  # 失败信息
 - 最后指令行只有在上面所有操作没报错没超时的情况下会进行检查逻辑决定是否成功，若执行直接出现错误会直接返回失败
 - 最终指令行的验证指令如下表
 
-| 指令名称          | 指令说明                | 指令示例                             |
-| ----------------- | ----------------------- | ------------------------------------ |
-| check-have-any    | 是否有任何结果          | -p80 bad= check-have-any             |
-| check-have-any-r  | 是否有任何结果-取反     | -p80 bad= check-have-any-r           |
-| check-have-none   | 是否结果为空串          | -p80 bad= check-have-none            |
-| check-have-none-r | 是否结果为空串-取反     | -p80 bad= check-have-none-r          |
-| check-have-all    | 是否与结果完全匹配      | -p80 bad= check-have-all=mutantcat   |
-| check-have-all-r  | 是否与结果完全匹配-取反 | -p80 bad= check-have-all-r=mutantcat |
-| check-have        | 是否包含某内容          | -p80 bad= check-have=mutantcat       |
-| check-have-r      | 是否包含某内容- 取反    | -p80 bad= check-have-r=mutantcat     |
+    | 指令名称          | 指令说明                | 指令示例                             |
+    | ----------------- | ----------------------- | ------------------------------------ |
+    | check-have-any    | 是否有任何结果          | -p80 bad= check-have-any             |
+    | check-have-any-r  | 是否有任何结果-取反     | -p80 bad= check-have-any-r           |
+    | check-have-none   | 是否结果为空串          | -p80 bad= check-have-none            |
+    | check-have-none-r | 是否结果为空串-取反     | -p80 bad= check-have-none-r          |
+    | check-have-all    | 是否与结果完全匹配      | -p80 bad= check-have-all=mutantcat   |
+    | check-have-all-r  | 是否与结果完全匹配-取反 | -p80 bad= check-have-all-r=mutantcat |
+    | check-have        | 是否包含某内容          | -p80 bad= check-have=mutantcat       |
+    | check-have-r      | 是否包含某内容- 取反    | -p80 bad= check-have-r=mutantcat     |
 
