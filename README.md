@@ -19,7 +19,7 @@
 - 也欢迎将错误信息新建一个错误ID上传到example文件夹
 - 提交的poem在我们审核过后很快也会同步到网路拉取列表中
 - 本地文件中的诗词中的依赖和bad
-- 网络检索诗词和AI生成诗词功能正在开发中...
+- 网络检索诗词和AI生成诗词功能后续将提供；当前版本以本地 poem 文件与目录检索为主
 
 ### 二、应用场景
 
@@ -139,7 +139,7 @@
   韵 - 找到以下诗歌:
            0 :  .//install-nginx-centos7-amd64.poem
   
-  韵 - 您可以使用 rayme -file xxx 来运行指定的诗歌文件
+  韵 - 您可以使用 rhyme -file xxx 来运行指定的诗歌文件
   
   ```
 
@@ -152,7 +152,7 @@
 | key          | 字符串   | 搜索诗歌时的关键字                                           | rhyme -search -folder ./ -key install                        |
 | depth        | 数字     | 最大联调深度                                                 | rhyme -file install-nginx-centos7-amd64.poem -depth 10       |
 | su           | 布尔     | 是否使用管理员权限运行                                       | rhyme -file install-nginx-centos7-amd64.poem -su             |
-| search       | 字符串   | 是否启用搜索模式                                             | rhyme -search -folder ./                                     |
+| search       | 布尔     | 是否启用搜索模式                                             | rhyme -search -folder ./                                     |
 | Args(xx=123) | 诗词参数 | 跟在后面的其他参数(诗中的$&{filename}和$&{password}将被替换) | rhyme -file install-nginx-centos7-amd64.poem filename=hello password=123456 |
 
 ### 五、诗词参数说明

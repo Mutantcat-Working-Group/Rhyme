@@ -11,17 +11,18 @@ import (
 	"strings"
 )
 
+// version 为当前发布版本号，集中定义避免散落在 banner/README/CHANGELOG 中漂移。
+const version = "1.0.20260711"
+
 func main() {
 	// 获得命令行参数
 	// 定义命令行标志
 	file := flag.String("file", "", "目标诗歌文件路径")      // 字符串标志
 	folder := flag.String("folder", "", "搜索诗歌文件夹路径") // 字符串标志
-	key := flag.String("key", "", "搜索关键字")           // 字符串标志
-	//web := flag.String("file", "", "目标诗歌网络路径")  // 字符串标志
-	//cloudstep := flag.String("cloudstep", "", "目标诗歌云阶路径")  // 字符串标志
-	depth := flag.Int("depth", 5, "最大联调深度")         // 整数标志
-	su := flag.Bool("su", false, "是否使用管理员权限运行")     // 布尔标志
-	search := flag.Bool("search", false, "是否为搜索模式") // 布尔标志
+	key := flag.String("key", "", "搜索关键字")              // 字符串标志
+	depth := flag.Int("depth", 5, "最大联调深度")             // 整数标志
+	su := flag.Bool("su", false, "是否使用管理员权限运行")       // 布尔标志
+	search := flag.Bool("search", false, "是否为搜索模式")     // 布尔标志
 	flag.Parse()
 	// 开始执行操作
 	global_config := config.Config{}
@@ -32,12 +33,11 @@ func main() {
 ██╔══██╗██╔══██║  ╚██╔╝  ██║╚██╔╝██║██╔══╝  
 ██║  ██║██║  ██║   ██║   ██║ ╚═╝ ██║███████╗
 ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝╚══════╝
-By: mutantcat.org         诗·韵 v1.0.20250331
+By: mutantcat.org         诗·韵 v` + version + `
 `
 	fmt.Println(strings.Trim(multi_line_string, "\n"))
-	// 获取所有命令行参数
-	args := os.Args
-	fmt.Println(args)
+	// 记录本次调用，便于排查。
+	fmt.Println("调用的参数:", strings.Join(os.Args[1:], " "))
 	global_config.OS_TYPE = runtime.GOOS
 	global_config.OS_ARCH = runtime.GOARCH
 	global_config.OS_CORE = runtime.NumCPU()
@@ -99,7 +99,7 @@ By: mutantcat.org         诗·韵 v1.0.20250331
 			fmt.Println("	", index, ": ", file)
 		}
 		fmt.Println()
-		fmt.Println("韵 - 您可以使用 rayme -file xxx 来运行指定的诗歌文件")
+		fmt.Println("韵 - 您可以使用 rhyme -file xxx 来运行指定的诗歌文件")
 	} else {
 		content := fetcher.ReadFile(*file)
 		fmt.Println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★")

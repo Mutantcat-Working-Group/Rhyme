@@ -2,71 +2,79 @@ package poem
 
 import "strings"
 
+// ParsePoem 解析 .poem 文本为结构体。
+//
+// 解析基于行前缀（title:/info:/from:/need:/poem:/good:/bad:），不依赖行的绝对位置，
+// 因此字段可以省略、重排，字段之间也可以穿插空行。
+//
+// 遇到 poem: 进入正文段，其后所有非空行（已 trim）都视为诗句，直到遇到 good:/bad: 结束。
+// 正文里命令行应与 -p 等待行成对出现，该不变量由 RunPoem 在运行时校验。
 func ParsePoem(origin string, args map[string]string) *Poem {
 	// 将原文中的$&{abc} 替换为args["abc"]
 	for key, value := range args {
 		origin = strings.ReplaceAll(origin, "$&{"+key+"}", value)
 	}
 
-	// 解析诗句
-	poem := &Poem{}
-	// 保存原文
-	poem.Origin = origin
-	poem.Args = args
-	poem.Poem = make([]string, 0)
+	p := &Poem{}
+	p.Origin = origin
+	p.Args = args
+	p.Poem = make([]string, 0)
 
 	lines := strings.Split(origin, "\n")
-	// 去掉所有 \r
-	for i := 0; i < len(lines); i++ {
+	for i := range lines {
 		lines[i] = strings.ReplaceAll(lines[i], "\r", "")
 	}
-	// 读取第一行 中的内容到标题 前面的title:可以省略
-	mode := 0
-	for index, line := range lines {
-		if mode == 0 {
-			if strings.HasPrefix(line, "title:") || index == 0 {
-				poem.Title = strings.TrimPrefix(line, "title:")
-				poem.Title = strings.TrimPrefix(poem.Title, " ")
-			} else if strings.HasPrefix(line, "info:") || index == 1 {
-				poem.Info = strings.TrimPrefix(line, "info:")
-				poem.Info = strings.TrimPrefix(poem.Info, " ")
-			} else if strings.HasPrefix(line, "from:") || index == 2 {
-				poem.From = strings.Split(strings.TrimPrefix(strings.TrimPrefix(line, "from:"), " "), " ")
-				// 去掉每部分的前后空格
-				for i := 0; i < len(poem.From); i++ {
-					poem.From[i] = strings.TrimSpace(poem.From[i])
-				}
-			} else if strings.HasPrefix(line, "need:") || index == 3 {
-				poem.Need = strings.Split(strings.TrimPrefix(strings.TrimPrefix(line, "need:"), " "), " ")
-				// 去掉每部分的前后空格
-				for i := 0; i < len(poem.Need); i++ {
-					poem.Need[i] = strings.TrimSpace(poem.Need[i])
-				}
-			} else if line == "" {
-				mode = 1
-			}
-		} else if mode == 1 {
-			if line == "poem:" || index == 5 {
+
+	inPoem := false
+	for _, line := range lines {
+		trimmed := strings.TrimSpace(line)
+
+		// poem: 之后进入正文，good:/bad: 会终止正文段。
+		if inPoem {
+			if strings.HasPrefix(trimmed, "good:") {
+				p.Good = strings.TrimSpace(strings.TrimPrefix(trimmed, "good:"))
+				inPoem = false
 				continue
-			} else if line != "" {
-				poem.Poem = append(poem.Poem, line)
-			} else {
-				mode = 2
 			}
-		} else if mode == 2 {
-			if strings.HasPrefix(line, "good:") {
-				poem.Good = strings.TrimPrefix(line, "good:")
-				// 去掉前后空格
-				poem.Good = strings.TrimPrefix(poem.Good, " ")
-			} else if strings.HasPrefix(line, "bad:") {
-				poem.Bad = strings.TrimPrefix(line, "bad:")
-				// 去掉前后空格
-				poem.Bad = strings.TrimPrefix(poem.Bad, " ")
-			} else if line == "" {
-				mode = 3
+			if strings.HasPrefix(trimmed, "bad:") {
+				p.Bad = strings.TrimSpace(strings.TrimPrefix(trimmed, "bad:"))
+				inPoem = false
+				continue
 			}
+			// 跳过空行（诗集里空行仅作分隔，不构成命令）；其余行 trim 后保留。
+			if trimmed == "" {
+				continue
+			}
+			p.Poem = append(p.Poem, trimmed)
+			continue
+		}
+
+		switch {
+		case strings.HasPrefix(trimmed, "title:"):
+			p.Title = strings.TrimSpace(strings.TrimPrefix(trimmed, "title:"))
+		case strings.HasPrefix(trimmed, "info:"):
+			p.Info = strings.TrimSpace(strings.TrimPrefix(trimmed, "info:"))
+		case strings.HasPrefix(trimmed, "from:"):
+			p.From = splitFields(strings.TrimPrefix(trimmed, "from:"))
+		case strings.HasPrefix(trimmed, "need:"):
+			p.Need = splitFields(strings.TrimPrefix(trimmed, "need:"))
+		case strings.HasPrefix(trimmed, "poem:"):
+			inPoem = true
+		case strings.HasPrefix(trimmed, "good:"):
+			p.Good = strings.TrimSpace(strings.TrimPrefix(trimmed, "good:"))
+		case strings.HasPrefix(trimmed, "bad:"):
+			p.Bad = strings.TrimSpace(strings.TrimPrefix(trimmed, "bad:"))
 		}
 	}
 
-	return poem
+	return p
+}
+
+// splitFields 按空白切分并去掉空串，避免 strings.Split 产生空元素。
+func splitFields(s string) []string {
+	fields := strings.Fields(s)
+	if len(fields) == 0 {
+		return nil
+	}
+	return fields
 }

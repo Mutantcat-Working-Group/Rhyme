@@ -2,26 +2,19 @@ package exec
 
 import (
 	"context"
-	"fmt"
 	"os/exec"
 	"runtime"
 )
 
-func Run(ctx context.Context, cmd *exec.Cmd, line string, su bool) *exec.Cmd {
+// Run 在指定平台的 shell 中执行一行命令。
+// Windows 用 cmd /C，其他系统（linux/darwin/bsd 等类 Unix）统一用 bash -c，
+// su 为真时改用 sudo bash -c。该函数永远不返回 nil。
+func Run(ctx context.Context, line string, su bool) *exec.Cmd {
 	if runtime.GOOS == "windows" {
-		// Windows系统执行cmd指令
-		cmd = exec.CommandContext(ctx, "cmd", "/C", line)
-	} else if runtime.GOOS == "linux" {
-		// Linux系统执行bash指令
-		if !su {
-			cmd = exec.CommandContext(ctx, "bash", "-c", line)
-		} else {
-			cmd = exec.CommandContext(ctx, "sudo", "bash", "-c", line)
-		}
-	} else {
-		fmt.Println("诗 - 未知的操作系统，请反馈此问题。")
-		return nil
+		return exec.CommandContext(ctx, "cmd", "/C", line)
 	}
-
-	return cmd
+	if su {
+		return exec.CommandContext(ctx, "sudo", "bash", "-c", line)
+	}
+	return exec.CommandContext(ctx, "bash", "-c", line)
 }

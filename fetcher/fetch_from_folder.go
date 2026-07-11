@@ -17,9 +17,8 @@ func ReadFile(path string) string {
 	return string(content)
 }
 
-// 搜索目标路径所在的文件夹内
+// 搜索目标路径所在的文件夹内（含子文件夹）所有文件名含 name 且以 .poem 结尾的文件。
 func SearchFolder(path, name string) []string {
-	list := make([]string, 0)
 	// 获取文件信息
 	info, err := os.Stat(path)
 	if err != nil {
@@ -28,7 +27,7 @@ func SearchFolder(path, name string) []string {
 		} else {
 			fmt.Println("韵 - 获取信息时出错:", err)
 		}
-		return list
+		return nil
 	}
 
 	// 判断是文件还是文件夹
@@ -44,17 +43,17 @@ func SearchFolder(path, name string) []string {
 
 	var result []string
 	for _, file := range files {
-		if strings.Contains(file.Name(), name) {
-			// 如果文件格式是poem则添加到列表
-			if strings.HasSuffix(file.Name(), ".poem") {
-				// 将路径符号统一
-				path = strings.ReplaceAll(path, "\\", "/")
-				result = append(result, path+"/"+file.Name())
-			}
-		} else if file.IsDir() {
+		// 目录一律递归（无论目录名是否含关键词），避免含关键词的子目录被跳过。
+		if file.IsDir() {
 			subDirResults := SearchFolder(path+"/"+file.Name(), name)
-			// 如果文件格式是poem则添加到列表
 			result = append(result, subDirResults...)
+			continue
+		}
+		// 文件格式是poem则添加到列表
+		if strings.Contains(file.Name(), name) && strings.HasSuffix(file.Name(), ".poem") {
+			// 将路径符号统一
+			path = strings.ReplaceAll(path, "\\", "/")
+			result = append(result, path+"/"+file.Name())
 		}
 	}
 	return result
