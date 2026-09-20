@@ -12,17 +12,17 @@ import (
 )
 
 // version 为当前发布版本号，集中定义避免散落在 banner/README/CHANGELOG 中漂移。
-const version = "1.0.20260711"
+var version = "1.0.20260920"
 
 func main() {
 	// 获得命令行参数
 	// 定义命令行标志
 	file := flag.String("file", "", "目标诗歌文件路径")      // 字符串标志
 	folder := flag.String("folder", "", "搜索诗歌文件夹路径") // 字符串标志
-	key := flag.String("key", "", "搜索关键字")              // 字符串标志
-	depth := flag.Int("depth", 5, "最大联调深度")             // 整数标志
-	su := flag.Bool("su", false, "是否使用管理员权限运行")       // 布尔标志
-	search := flag.Bool("search", false, "是否为搜索模式")     // 布尔标志
+	key := flag.String("key", "", "搜索关键字")           // 字符串标志
+	depth := flag.Int("depth", 5, "最大联调深度")          // 整数标志
+	su := flag.Bool("su", false, "是否使用管理员权限运行")      // 布尔标志
+	search := flag.Bool("search", false, "是否为搜索模式")  // 布尔标志
 	flag.Parse()
 	// 开始执行操作
 	global_config := config.Config{}
