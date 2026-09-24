@@ -1,3 +1,5 @@
+// 诗·韵（Rhyme）— 由异猫工作群（mutantcat.org）发行
+// GitHub: https://github.com/Mutantcat-Working-Group
 package main
 
 import (
@@ -34,6 +36,7 @@ func main() {
 ██║  ██║██║  ██║   ██║   ██║ ╚═╝ ██║███████╗
 ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝╚══════╝
 By: mutantcat.org         诗·韵 v` + version + `
+GitHub: https://github.com/Mutantcat-Working-Group
 `
 	fmt.Println(strings.Trim(multi_line_string, "\n"))
 	// 记录本次调用，便于排查。
